@@ -1,0 +1,174 @@
+<body>
+    <div class="top-bar">
+        <h1>
+            C4C Message Board
+        </h1>
+    </div>
+    <div class="main">
+        <div class="header">
+        </div>
+        <textarea maxlength="128"></textarea>
+        <button>Send</button>
+        <div class="comments">
+        </div>
+    </div>
+    <script src="data.js"></script>
+    <script>
+        var id = 1; // window.location.search.slice(1) for multiple threads
+        var thread = threads.find(t => t.id == id);
+        var header = document.querySelector('.header');
+        var headerHtml = `
+            <h4 class="title">
+                ${thread.title}
+            </h4>
+            <div class="bottom">
+                <p class="timestamp">
+                    ${new Date(thread.date).toLocaleString()}
+                </p>
+                <p class="comment-count">
+                    ${thread.comments.length} comments
+                </p>
+            </div>
+        `
+        header.insertAdjacentHTML('beforeend', headerHtml)
+
+        function addComment(comment) {
+
+            if (comment.content.length == 0) {
+                console.log("Message must be non-empty");
+            }
+            else {
+                var commentHtml = `
+                <div class="comment">
+                    <div class="top-comment">
+                        <p class="user">
+                            ${comment.author}
+                        </p>
+                        <p class="comment-ts">
+                            ${new Date(comment.date).toLocaleString()}
+                        </p>
+                    </div>
+                    <div class="comment-content">
+                        ${comment.content}
+                    </div>
+                </div>
+            `
+            comments.insertAdjacentHTML('afterbegin', commentHtml);
+            }
+        }
+
+        var comments = document.querySelector('.comments');
+        for (let comment of thread.comments) {
+            addComment(comment);
+        }
+
+    var btn = document.querySelector('button');
+    btn.addEventListener('click', function () {
+        var txt = document.querySelector('textarea');
+
+        var storedUsername = localStorage.getItem('username');
+        var author = storedUsername ? storedUsername : generateRandomUsername();
+
+        var comment = {
+            content: txt.value,
+            date: Date.now(),
+            author: author
+        }
+        addComment(comment);
+        txt.value = ''
+        thread.comments.push(comment);
+
+        localStorage.setItem('username', author);
+        localStorage.setItem('threads', JSON.stringify(threads));
+    })
+
+    function generateRandomUsername () {
+        var prefix = 'Guest';
+        var randomNum = Math.floor(Math.random() * 1000);
+        return prefix + " " + randomNum;
+    }
+    </script>
+    <style>
+        body {
+            margin: 10px 50px;
+            font-size: 25px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        h1 {
+            margin: 0;
+        }
+        h4, ol {
+            margin: 0;
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        p {
+            margin: 5px 0;
+        }
+        textarea {
+            width: 100%;
+            height: 50px;
+            padding: 12px 20px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            background-color: #f8f8f8;
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            resize: none;
+        }
+        button {
+            background: purple;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: block;
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 10px 2px;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+        }
+        .top-bar {
+            background: purple;
+            color: white;
+            font-size: 25px;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px 40px;
+            text-align: left;
+        }
+        .main {
+            background-color: #F6F6EF;
+            padding: 10px 40px;
+        }
+        .comments {
+            margin: 20px 0;
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .comment {
+            margin: 10px 0;
+            font-size: 15px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .row {
+            padding: 5px 0;
+        }
+        .bottom, .top-comment {
+            display: flex;
+            color: grey;
+            font-size: 12px;
+        }
+        .timestamp {
+            padding-right: 10px;
+        }
+        .comment-ts {
+            padding-left: 10px;
+        }
+    </style>
+</body>

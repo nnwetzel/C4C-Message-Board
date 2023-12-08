@@ -1,0 +1,79 @@
+<body>
+    <div class="top-bar">
+        <h1>
+            C4C Message Board
+        </h1>
+    </div>
+    <div class="main">
+        <ol>
+        </ol>
+    </div>
+    <script src="data.js"></script>
+    <script>
+        var container = document.querySelector('ol');
+        for (let thread of threads) {
+            var html = `
+            <li class="row">
+                <a href="http://localhost:5500/thread.html">
+                    <h4 class="title">
+                        ${thread.title}
+                    </h4>
+                    <div class="bottom">
+                        <p class="timestamp">
+                            ${new Date(thread.date).toLocaleString()}
+                        </p>
+                        <p class="comment-count">
+                            ${thread.comments.length} comments
+                        </p>
+                    </div>
+                </a>
+            </li>
+            `
+            
+            container.insertAdjacentHTML('beforeend', html);
+        }
+    </script>
+
+    <style>
+        body {
+            margin: 10px 50px;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        h1 {
+            margin: 0;
+        }
+        h4, ol {
+            margin: 0;
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        p {
+            margin: 5px 0;
+        }
+        .top-bar {
+            background: purple;
+            color: white;
+            font-size: 25px;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px 40px;
+            text-align: left;
+        }
+        .main {
+            background-color: #F6F6EF;
+            padding: 10px 15px;
+        }
+        .row {
+            padding: 5x 0;
+        }
+        .bottom {
+            display: flex;
+            color: grey;
+            font-size: 12px;
+        }
+        .timestamp {
+            padding-right: 10px;
+        }
+    </style>
