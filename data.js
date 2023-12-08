@@ -9,7 +9,7 @@ var threads = [
             {
                 author: "Nat",
                 date: new Date("2023-12-07T21:05:21"),
-                content: "Hi, my name is Nathaniel Wetzel. Welcome to my messaging board application for C4C.",
+                content: "Hi, my name is Nathaniel Wetzel. Welcome to my messaging board application for C4C!",
             },
         ]
     },
