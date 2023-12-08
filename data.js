@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     } else {
         try {
             // Fetch threads from the server
-            const response = await fetch('http://localhost:3000/threads');
+            const response = await fetch('https://nnwetzel.github.io/C4C-Message-Board/thread');
             const data = await response.json();
 
             // Assuming the data received is an array of threads
