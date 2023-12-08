@@ -15,11 +15,32 @@ var threads = [
     },
 ]
 
-var threads;
-if (localStorage && localStorage.getItem ('threads')) {
-   threads = JSON.parse(localStorage.getItem('threads'));
-} else {
-    threads = defaultThreads;
-    localStorage.setItem ('threads', JSON.stringify(defaultThreads));
-}
+document.addEventListener('DOMContentLoaded', async function () {
+    var threads;
+
+    try {
+        const response = await fetch('https://nnwetzel.github.io/C4C-Message-Board/thread');
+        const data = await response.json();
+
+        // Assuming the data received is an array of threads
+        threads = data;
+
+        // Call a function to initialize or update the UI with the fetched threads
+        updateUI();
+    } catch (error) {
+        console.error('Error fetching threads:', error);
+
+        // If there's an error fetching threads, use defaultThreads or handle it accordingly
+        threads = defaultThreads;
+
+        // Call a function to initialize or update the UI with the default threads
+        updateUI();
+    }
+
+    function updateUI() {
+        // Add code here to update the UI with the threads data
+        // For example, you can render the threads in the HTML or perform other UI-related tasks
+    }
+});
+
 //localStorage.clear();
