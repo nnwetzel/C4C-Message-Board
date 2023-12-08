@@ -22,4 +22,4 @@ if (localStorage && localStorage.getItem ('threads')) {
     threads = defaultThreads;
     localStorage.setItem ('threads', JSON.stringify(defaultThreads));
 }
-localStorage.clear();
+//localStorage.clear();
