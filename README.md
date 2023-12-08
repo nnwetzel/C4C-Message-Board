@@ -11,7 +11,7 @@
 ### JavaScript (inline)
 1. The inline JavaScript code fetches the container and populates the thread list using data from the threads array.
 2. When a thread is clicked, the user is redirected to a detailed view of the thread with comments.
-3. The script handles adding comments to a specific thread by dynamically updateing the HTML with comments.
+3. The script handles adding comments to a specific thread by dynamically updating the HTML with comments.
 4. If a username is stored in the local storage, it is used; otherwise, a random username is generated.
 5. The "Send" button triggers an event listener to add a new comment. The comment is displayed on the page, and the thread's comment array is updated.
 
