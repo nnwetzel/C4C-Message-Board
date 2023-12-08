@@ -5,8 +5,8 @@
 ### HTML Structure
 1. The top bar (`<div class="top-bar">`) contains the title "C4C Message Board."
 2. The thread list is represented by an ordered list (`<ol>`).
-3. Two <script> tags include the JavaScript code (data.js and inline script).
-4. The <style> tag includes CSS styles for formatting the appearance of the page.
+3. Two `<script>` tags include the JavaScript code (data.js and inline script).
+4. The `<style>` tag includes CSS styles for formatting the appearance of the page.
 
 ### JavaScript (inline)
 1. The inline JavaScript code fetches the container and populates the thread list using data from the threads array.
