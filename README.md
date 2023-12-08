@@ -23,10 +23,10 @@
 1. The threads array holds objects, each representing a message board thread. Each thread has an ID, title, author, date, content, and an array of comments.
 2. Thread data is stored in the local storage. If no data is found, default threads are used. (NOTE: I was not able to implement a server-sided database.)
 
-### Why do I fulfill the requirements?
+## Why do I fulfill the requirements?
 1. Users are able to type a message and to post it to a board. The message has to be non-empty and 128 characters or less.
 2. Users are able to view messages on the board from most to least recent.
 3. Even though I was not able to implement a server-sided database, I used `localStorage` instead which means that comment data is local to an individual's computer. Being a first-year student with limited experience using HTML, CSS, and JavaScript, I believe that I did my best learning web development and implementing a message board application. However, with the resources and mentorship that C4C offers, I know that I would be able to easily implement this final requirement to this application to ensure that comments can be viewed from various devices.
 
-### How do I start the application?
+## How do I start the application?
 https://nnwetzel.github.io/C4C-Message-Board/
