@@ -18,23 +18,36 @@ var threads = [
 document.addEventListener('DOMContentLoaded', async function () {
     var threads;
 
-    try {
-        const response = await fetch('http://localhost:3000/threads');
-        const data = await response.json();
+    // Try to get threads from localStorage
+    const storedThreads = localStorage.getItem('threads');
 
-        // Assuming the data received is an array of threads
-        threads = data;
-
-        // Call a function to initialize or update the UI with the fetched threads
+    if (storedThreads) {
+        // If threads are stored in localStorage, use them
+        threads = JSON.parse(storedThreads);
         updateUI();
-    } catch (error) {
-        console.error('Error fetching threads:', error);
+    } else {
+        try {
+            // Fetch threads from the server
+            const response = await fetch('http://localhost:3000/threads');
+            const data = await response.json();
 
-        // If there's an error fetching threads, use defaultThreads or handle it accordingly
-        threads = defaultThreads;
+            // Assuming the data received is an array of threads
+            threads = data;
 
-        // Call a function to initialize or update the UI with the default threads
-        updateUI();
+            // Cache threads in localStorage
+            localStorage.setItem('threads', JSON.stringify(threads));
+
+            // Call a function to initialize or update the UI with the fetched threads
+            updateUI();
+        } catch (error) {
+            console.error('Error fetching threads:', error);
+
+            // If there's an error fetching threads, use defaultThreads or handle it accordingly
+            threads = defaultThreads;
+
+            // Call a function to initialize or update the UI with the default threads
+            updateUI();
+        }
     }
 
     function updateUI() {
@@ -42,5 +55,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         // For example, you can render the threads in the HTML or perform other UI-related tasks
     }
 });
+
 
 //localStorage.clear();
